@@ -1,0 +1,170 @@
+<!DOCTYPE html><html><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css><title>Pokemon App</title><style>html, body{
+      margin:0;
+      padding:0;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+    body{
+      overflow:hidden;
+        z-index: 0;
+        background-color:#dedede;
+    }
+    #toptriangle{
+      pointer-events: none;
+        background-image:linear-gradient(50deg,#f22,#f22);
+        box-shadow: inset 0px 0px 50px #353535, 0px 0px 50px #00000050;
+        position: absolute;
+        min-width: 120vw;
+        min-height: 120vw;
+        left:-50%;
+        top:-50%;
+        transform: rotate(-45deg) rotateY(40deg);
+        transition-duration: 2s;
+        border-radius: 2000vw;
+        
+    }
+    .fa{
+        font-size: 75px !important;
+        text-shadow: 2px 5px 5px #00000050;
+        display:block;
+        margin:0 auto;
+        margin-bottom: 20px;
+        transition-duration: 0.35s;
+    }
+    .navbar {
+        position:fixed;
+        z-index: 10;
+        width: 100%;
+        background-color: #353535;
+        overflow:visible;
+        text-align: center;
+        box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    }
+    .dropbtn {
+        background-color:#dedede;
+        color: #353535;
+        padding: 16px;
+        width:200px;
+        font-size: 16px;
+        border: none;
+        margin:0 -3px;
+        transition-duration: 0.5s;
+    }
+    .dropdown {
+        position: relative;
+        text-align: center;
+        display: inline-block;
+        margin:0;
+        padding:0;
+    }
+
+    .dropdown-content {
+        display: none;
+        position: absolute;
+        right:0px;
+        left:0px;
+        background-color: #f1f1f100;
+        min-width: 160px;
+        box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+        z-index: 1;
+        transition-duration: 0.5s;
+    }
+
+    .dropdown-content a {
+        color: black;
+        padding: 12px 16px;
+        text-decoration: none;
+        display: block;
+    }
+
+    .dropdown-content a:hover {background-color: #ddd;}
+    .dropdown:hover .dropdown-content {display: block; opacity:1; background-color: #f1f1f1;}
+
+    .dropdown:hover .dropbtn { color: white;}
+    .dropdown:hover .fa {color: white;}
+    @media only screen and (max-width:591px){
+        .fa{
+            display: none;
+        }
+        .dropdown{
+            display: block;
+            width: max-content;
+            margin: 0 auto;
+        }
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+    }
+    #app{
+      z-index: 100;
+    }
+    .hover-box {
+      position: relative;
+      width: 50%;
+      height: 50%;
+      float: left;
+      top: calc(-100% + 40px);
+      display: none;
+    }
+    .card:hover{
+      transform: scale(1) !important;
+        box-shadow: 1em 1em .6em -.5em #0005 !important;
+    }
+    #screenlocation{
+      position:absolute;
+      color:white;
+      z-index: 500;
+    }</style><script>// Reference: http://www.html5rocks.com/en/tutorials/speed/animations/
+
+        let last_known_scroll_position = 0;
+        let ticking = false;
+        let cardDeck = document.getElementById("card-deck");
+
+        function doSomething(scroll_pos) {
+          document.getElementById("screenlocation").innerHTML = scroll_pos;
+        }
+
+        document.addEventListener('scroll', function(e) {
+          last_known_scroll_position = cardDeck.scrollY;
+
+          if (!ticking) {
+            window.requestAnimationFrame(function() {
+              doSomething(last_known_scroll_position);
+              ticking = false;
+            });
+
+            ticking = true;
+          }
+        });
+
+
+
+
+      function ftl(x) {
+        x.parentNode.style.transform = "rotateX(3deg) rotateY(-3deg)"; 
+        x.parentNode.style.boxShadow = "0.75em 0.75em 0.75em -.5em #0003"; 
+      }
+      function ftr(x) {
+        x.parentNode.style.transform = "rotateX(3deg) rotateY(3deg)"; 
+        x.parentNode.style.boxShadow = "-0.75em 0.75em 0.75em -.5em #0003"; 
+      }
+      function fbl(x) {
+        x.parentNode.style.transform = "rotateX(-3deg) rotateY(-3deg)"; 
+        x.parentNode.style.boxShadow = "0.75em -0.75em 0.75em -.5em #0003"; 
+      }
+      function fbr(x) {
+        x.parentNode.style.transform = "rotateX(-3deg) rotateY(3deg)"; 
+        x.parentNode.style.boxShadow = "-0.75em -0.75em 0.75em -.5em #0003"; 
+      }
+      function fnormal(x) {
+        x.parentNode.style.transform = "scale(0.75) rotateX(0deg) rotateY(0deg)"; 
+        x.parentNode.style.boxShadow = "0.2em 0.2em 0.2em 0.2em #0005";
+      }
+      function moveToCenter(x){
+        var style = document.createElement('style');
+        style.innerHTML =
+          '.card {' +
+            'position:absolute;'
+          '}';
+
+
+      }</script><link href=/static/css/app.12cfb2ced228f7fd86bec5798d304458.css rel=stylesheet></head><body><div id=screenlocation>00.00</div><div id=toptriangle></div><div class=navbar id=navbar><div class=dropdown><button class=dropbtn><i class="fa fa-fw fa-newspaper-o"></i>Who's that Pokémon?</button></div><div class=dropdown><a><button class=dropbtn><i class="fa fa-fw fa-vcard-o"></i>Search</button></a><div class=dropdown-content><a target=_blank>Pokémon</a> <a target=_blank>Trainers</a></div></div><div class=dropdown><a><button class=dropbtn><i class="fa fa-fw fa-microchip"></i>Documentation</button></a></div></div><div id=app></div><script type=text/javascript src=/static/js/manifest.2ae2e69a05c33dfc65f8.js></script><script type=text/javascript src=/static/js/vendor.167eb62a63f56d920527.js></script><script type=text/javascript src=/static/js/app.db85b7964a21657e6535.js></script></body></html>
